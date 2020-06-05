@@ -27,10 +27,18 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 		$table_users = $row['name'];
 		if($name == $table_users) 
 		{
-			$bool = true; 
+			$bool = false; 
+			Print '<script>alert("Name has been taken!");</script>';
 			Print '<script>window.location.assign("register1.php");</script>';
 		}
-	}
+		$table_users = $row['email'];
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+   {
+			$bool = false; 
+			Print '<script>alert("Please enter a valid e-mail adress!");</script>';
+			Print '<script>window.location.assign("register1.php");</script>';
+		}
+}
 	if($bool) 
 	{
 		mysqli_query($db,"INSERT INTO users (name, email) VALUES ('$name','$email')"); 
